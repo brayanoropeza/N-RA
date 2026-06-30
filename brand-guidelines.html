@@ -22,6 +22,7 @@
             --nura-black: #1A1A1A;
             --nura-gold: #D4AF37;
             --nura-pink: #E91E63;
+            --nura-blue: #1E88E5;
             --nura-white: #FFFFFF;
             --nura-gray: #E0E0E0;
             --nura-gray-dark: #2a2a2a;
@@ -33,6 +34,26 @@
             color: var(--nura-white);
             line-height: 1.8;
             overflow-x: hidden;
+            
+            /* Bloquear selección de texto */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            
+            /* Theme variables */
+            --theme-primary: var(--nura-pink);
+            --theme-primary-rgb: 233, 30, 99;
+            --theme-glow: rgba(233, 30, 99, 0.3);
+            --theme-glow-light: rgba(233, 30, 99, 0.15);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.theme-male {
+            --theme-primary: var(--nura-blue);
+            --theme-primary-rgb: 30, 136, 229;
+            --theme-glow: rgba(30, 136, 229, 0.3);
+            --theme-glow-light: rgba(30, 136, 229, 0.15);
         }
 
         h1, h2, h3, h4, .logo-text {
@@ -51,22 +72,25 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid var(--theme-glow);
+            transition: border-bottom 0.5s ease;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 1.8rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             text-decoration: none;
             font-weight: 600;
             letter-spacing: 3px;
+            transition: color 0.5s ease;
         }
 
         .nav-links {
             display: flex;
             gap: 25px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -80,13 +104,13 @@
         }
 
         .nav-links a:hover {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
         }
 
         .back-button {
             padding: 10px 25px;
-            border: 1px solid var(--nura-gold);
-            color: var(--nura-gold);
+            border: 1px solid var(--theme-primary);
+            color: var(--theme-primary);
             text-decoration: none;
             font-size: 0.85rem;
             letter-spacing: 2px;
@@ -96,8 +120,50 @@
         }
 
         .back-button:hover {
-            background: var(--nura-gold);
+            background: var(--theme-primary);
             color: var(--nura-black);
+            box-shadow: 0 0 10px var(--theme-glow);
+        }
+
+        /* Theme Switcher Styles */
+        .theme-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 4px;
+            gap: 4px;
+            margin-left: 20px;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--nura-gray);
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--nura-white);
+        }
+
+        .theme-btn.active {
+            background: var(--theme-primary);
+            color: var(--nura-black);
+            box-shadow: 0 0 10px var(--theme-glow);
+            font-weight: 600;
         }
 
         /* Hero */
@@ -106,14 +172,16 @@
             padding: 100px 5%;
             background: linear-gradient(135deg, var(--nura-black) 0%, var(--nura-gray-dark) 100%);
             text-align: center;
-            border-bottom: 2px solid var(--nura-gold);
+            border-bottom: 2px solid var(--theme-primary);
+            transition: border-bottom 0.5s ease;
         }
 
         .hero h1 {
             font-size: 3.5rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 20px;
             letter-spacing: 5px;
+            transition: color 0.5s ease;
         }
 
         .hero p {
@@ -127,11 +195,12 @@
             display: inline-block;
             margin-top: 30px;
             padding: 10px 30px;
-            background: rgba(212, 175, 55, 0.1);
-            border: 1px solid var(--nura-gold);
-            color: var(--nura-gold);
+            background: var(--theme-glow-light);
+            border: 1px solid var(--theme-primary);
+            color: var(--theme-primary);
             font-size: 0.9rem;
             letter-spacing: 2px;
+            transition: all 0.5s ease;
         }
 
         /* Contenido principal */
@@ -143,16 +212,18 @@
 
         section {
             padding: 80px 0;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid var(--theme-glow-light);
+            transition: border-bottom 0.5s ease;
         }
 
         .section-title {
             font-size: 2.5rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 40px;
             padding-bottom: 20px;
-            border-bottom: 2px solid var(--nura-gold);
+            border-bottom: 2px solid var(--theme-primary);
             display: inline-block;
+            transition: all 0.5s ease;
         }
 
         .section-subtitle {
@@ -171,20 +242,20 @@
 
         .brand-card {
             background: linear-gradient(135deg, var(--nura-gray-dark) 0%, var(--nura-black) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
             border-radius: 8px;
             padding: 40px;
             transition: all 0.3s ease;
         }
 
         .brand-card:hover {
-            border-color: var(--nura-gold);
+            border-color: var(--theme-primary);
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 10px 30px var(--theme-glow);
         }
 
         .brand-card h3 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.5rem;
             margin-bottom: 15px;
             display: flex;
@@ -213,8 +284,8 @@
         .value-item {
             text-align: center;
             padding: 30px;
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            background: var(--theme-glow-light);
+            border: 1px solid var(--theme-glow);
             border-radius: 5px;
         }
 
@@ -224,7 +295,7 @@
         }
 
         .value-item h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.3rem;
             margin-bottom: 10px;
         }
@@ -241,13 +312,13 @@
             border-radius: 10px;
             text-align: center;
             margin: 40px 0;
-            border: 2px solid var(--nura-gold);
+            border: 2px solid var(--theme-primary);
         }
 
         .logo-main {
             font-family: 'Playfair Display', serif;
             font-size: 6rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             letter-spacing: 10px;
             margin: 30px 0;
         }
@@ -263,11 +334,11 @@
             background: var(--nura-black);
             padding: 30px;
             border-radius: 5px;
-            border-left: 3px solid var(--nura-gold);
+            border-left: 3px solid var(--theme-primary);
         }
 
         .spec-box h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 15px;
             font-size: 1.1rem;
         }
@@ -292,7 +363,7 @@
             content: '→';
             position: absolute;
             left: 0;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
         }
 
         /* Paleta de Colores */
@@ -374,11 +445,11 @@
             background: linear-gradient(135deg, var(--nura-gray-dark) 0%, var(--nura-black) 100%);
             padding: 40px;
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
         }
 
         .graphic-item h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 20px;
             font-size: 1.3rem;
         }
@@ -398,7 +469,7 @@
             content: '✓';
             position: absolute;
             left: 0;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-weight: bold;
         }
 
@@ -414,11 +485,11 @@
             background: var(--nura-gray-dark);
             padding: 40px;
             border-radius: 8px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
         }
 
         .packaging-card h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.4rem;
             margin-bottom: 20px;
             display: flex;
@@ -434,7 +505,7 @@
 
         .packaging-card td {
             padding: 12px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid var(--theme-glow-light);
             color: var(--nura-gray);
         }
 
@@ -539,7 +610,7 @@
             background: var(--nura-gray-dark);
             padding: 50px 5%;
             text-align: center;
-            border-top: 2px solid var(--nura-gold);
+            border-top: 2px solid var(--theme-primary);
         }
 
         footer .logo {
@@ -554,7 +625,7 @@
         }
 
         .footer-tagline {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             letter-spacing: 3px;
             margin-top: 20px;
             font-size: 0.9rem;
@@ -609,7 +680,7 @@
 
     <!-- Navegación -->
     <nav>
-        <a href="#" class="logo">NÜRA</a>
+        <a href="index.html" class="logo">NÜRA</a>
         <ul class="nav-links">
             <li><a href="#brand-heart">Brand Heart</a></li>
             <li><a href="#logo">Logo</a></li>
@@ -618,6 +689,12 @@
             <li><a href="#empaque">Empaque</a></li>
             <li><a href="#voz">Voz</a></li>
         </ul>
+        
+        <div class="theme-switcher">
+            <button id="btnFemale" class="theme-btn active" title="Versión Ixchel (Femenina)">🌙 Femenino</button>
+            <button id="btnMale" class="theme-btn" title="Versión Itzamná (Masculina)">☀️ Masculino</button>
+        </div>
+
         <a href="index.html" class="back-button">← Volver al Sitio</a>
     </nav>
 
@@ -651,7 +728,7 @@
                 </div>
             </div>
 
-            <h3 style="color: var(--nura-gold); margin: 60px 0 30px; font-size: 1.8rem;">Valores de Marca</h3>
+            <h3 style="color: var(--theme-primary); margin: 60px 0 30px; font-size: 1.8rem; transition: color 0.5s ease;">Valores de Marca</h3>
             <div class="values-grid">
                 <div class="value-item">
                     <div class="value-icon">🌿</div>
@@ -771,11 +848,24 @@
                         Rosa Radiante
                     </div>
                     <div class="color-info">
-                        <h4>NÜRA Pink</h4>
+                        <h4>NÜRA Pink (Femenino)</h4>
                         <div class="color-code">HEX: #E91E63</div>
                         <div class="color-code">RGB: 233, 30, 99</div>
                         <div class="color-code">CMYK: 0, 90, 50, 0</div>
                         <div class="color-code">Pantone: 213 C</div>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-preview" style="background: var(--nura-blue); color: var(--nura-white);">
+                        Azul Celestial
+                    </div>
+                    <div class="color-info">
+                        <h4>NÜRA Blue (Masculino)</h4>
+                        <div class="color-code">HEX: #1E88E5</div>
+                        <div class="color-code">RGB: 30, 136, 229</div>
+                        <div class="color-code">CMYK: 80, 45, 0, 0</div>
+                        <div class="color-code">Pantone: 2925 C</div>
                     </div>
                 </div>
 
@@ -807,21 +897,25 @@
             <div style="margin-top: 50px; padding: 30px; background: var(--nura-gray-dark); border-radius: 8px;">
                 <h4 style="color: var(--nura-gold); margin-bottom: 20px;">Proporción de Uso</h4>
                 <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 20px;">
-                    <div style="flex: 1; min-width: 150px; text-align: center; padding: 20px; background: var(--nura-black); border-radius: 5px;">
+                    <div style="flex: 1; min-width: 120px; text-align: center; padding: 20px; background: var(--nura-black); border-radius: 5px;">
                         <div style="font-size: 2rem; color: var(--nura-gold); font-weight: bold;">60%</div>
                         <div style="color: var(--nura-gray); font-size: 0.9rem;">Negro Mate</div>
                     </div>
-                    <div style="flex: 1; min-width: 150px; text-align: center; padding: 20px; background: var(--nura-gold); border-radius: 5px;">
+                    <div style="flex: 1; min-width: 120px; text-align: center; padding: 20px; background: var(--nura-gold); border-radius: 5px;">
                         <div style="font-size: 2rem; color: var(--nura-black); font-weight: bold;">20%</div>
                         <div style="color: var(--nura-black); font-size: 0.9rem;">Dorado</div>
                     </div>
-                    <div style="flex: 1; min-width: 150px; text-align: center; padding: 20px; background: var(--nura-white); border-radius: 5px;">
+                    <div style="flex: 1; min-width: 120px; text-align: center; padding: 20px; background: var(--nura-white); border-radius: 5px;">
                         <div style="font-size: 2rem; color: var(--nura-black); font-weight: bold;">10%</div>
                         <div style="color: var(--nura-black); font-size: 0.9rem;">Blanco</div>
                     </div>
-                    <div style="flex: 1; min-width: 150px; text-align: center; padding: 20px; background: var(--nura-pink); border-radius: 5px;">
+                    <div style="flex: 1; min-width: 120px; text-align: center; padding: 20px; background: var(--nura-pink); border-radius: 5px;">
                         <div style="font-size: 2rem; color: var(--nura-white); font-weight: bold;">5%</div>
-                        <div style="color: var(--nura-white); font-size: 0.9rem;">Rosa</div>
+                        <div style="color: var(--nura-white); font-size: 0.9rem;">Rosa (Ixchel)</div>
+                    </div>
+                    <div style="flex: 1; min-width: 120px; text-align: center; padding: 20px; background: var(--nura-blue); border-radius: 5px;">
+                        <div style="font-size: 2rem; color: var(--nura-white); font-weight: bold;">5%</div>
+                        <div style="color: var(--nura-white); font-size: 0.9rem;">Azul (Itzamná)</div>
                     </div>
                 </div>
             </div>
@@ -902,10 +996,10 @@
                     <h4>Símbolo Ixchel (Luna)</h4>
                     <ul>
                         <li>Luna creciente dorada</li>
-                        <li>Versión femenina</li>
-                        <li>Fondo: Blanco</li>
+                        <li>Versión femenina (para mujeres)</li>
+                        <li>Fondo: Blanco / Elementos Rosa</li>
                         <li>Marca de agua: Glifo circular (20% opacidad)</li>
-                        <li>Color: Dorado</li>
+                        <li>Color: Dorado y Rosa Radiante</li>
                     </ul>
                 </div>
 
@@ -913,10 +1007,10 @@
                     <h4>Símbolo Itzamná (Sol-Jaguar)</h4>
                     <ul>
                         <li>Sol con rostro de jaguar</li>
-                        <li>Versión masculina</li>
-                        <li>Fondo: Negro</li>
+                        <li>Versión masculina (para hombres)</li>
+                        <li>Fondo: Negro / Elementos Azul</li>
                         <li>Marca de agua: Glifos dispersos (15% opacidad)</li>
-                        <li>Color: Dorado</li>
+                        <li>Color: Dorado y Azul Celestial</li>
                     </ul>
                 </div>
 
@@ -1015,27 +1109,27 @@
             <h2 class="section-title">Voz y Tono</h2>
             <p class="section-subtitle">Cómo habla NÜRA: personalidad y estilo de comunicación</p>
 
-            <div style="background: var(--nura-gray-dark); padding: 40px; border-radius: 8px; margin: 30px 0;">
-                <h3 style="color: var(--nura-gold); margin-bottom: 20px;">Personalidad de la Marca</h3>
+            <div style="background: var(--nura-gray-dark); padding: 40px; border-radius: 8px; margin: 30px 0; border: 1px solid var(--theme-glow-light); transition: border 0.5s ease;">
+                <h3 style="color: var(--theme-primary); margin-bottom: 20px; transition: color 0.5s ease;">Personalidad de la Marca</h3>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center;">
+                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center; border: 1px solid var(--theme-glow-light); transition: border 0.5s ease;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">🎓</div>
-                        <div style="color: var(--nura-gold); font-weight: 600;">Sabia</div>
+                        <div style="color: var(--theme-primary); font-weight: 600; transition: color 0.5s ease;">Sabia</div>
                         <div style="color: var(--nura-gray); font-size: 0.9rem;">pero no arrogante</div>
                     </div>
-                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center;">
+                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center; border: 1px solid var(--theme-glow-light); transition: border 0.5s ease;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">🤗</div>
-                        <div style="color: var(--nura-gold); font-weight: 600;">Cálida</div>
+                        <div style="color: var(--theme-primary); font-weight: 600; transition: color 0.5s ease;">Cálida</div>
                         <div style="color: var(--nura-gray); font-size: 0.9rem;">pero profesional</div>
                     </div>
-                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center;">
+                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center; border: 1px solid var(--theme-glow-light); transition: border 0.5s ease;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">✍️</div>
-                        <div style="color: var(--nura-gold); font-weight: 600;">Poética</div>
+                        <div style="color: var(--theme-primary); font-weight: 600; transition: color 0.5s ease;">Poética</div>
                         <div style="color: var(--nura-gray); font-size: 0.9rem;">pero directa</div>
                     </div>
-                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center;">
+                    <div style="padding: 20px; background: var(--nura-black); border-radius: 5px; text-align: center; border: 1px solid var(--theme-glow-light); transition: border 0.5s ease;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">🛡️</div>
-                        <div style="color: var(--nura-gold); font-weight: 600;">Confiable</div>
+                        <div style="color: var(--theme-primary); font-weight: 600; transition: color 0.5s ease;">Confiable</div>
                         <div style="color: var(--nura-gray); font-size: 0.9rem;">y eficiente</div>
                     </div>
                 </div>
@@ -1067,17 +1161,17 @@
                 </div>
             </div>
 
-            <div style="margin-top: 50px; padding: 40px; background: linear-gradient(135deg, var(--nura-gray-dark) 0%, var(--nura-black) 100%); border-radius: 8px; border-left: 4px solid var(--nura-gold);">
-                <h3 style="color: var(--nura-gold); margin-bottom: 20px;">Mensajes Clave</h3>
+            <div style="margin-top: 50px; padding: 40px; background: linear-gradient(135deg, var(--nura-gray-dark) 0%, var(--nura-black) 100%); border-radius: 8px; border-left: 4px solid var(--theme-primary); transition: border-left 0.5s ease;">
+                <h3 style="color: var(--theme-primary); margin-bottom: 20px; transition: color 0.5s ease;">Mensajes Clave</h3>
                 <div style="margin: 20px 0;">
-                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 5px;">
-                        <strong style="color: var(--nura-gold);">Tagline:</strong> "Domina el caos. Radiante en segundos."
+                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: var(--theme-glow-light); border-radius: 5px; transition: background 0.5s ease;">
+                        <strong style="color: var(--theme-primary); transition: color 0.5s ease;">Tagline:</strong> "Domina el caos. Radiante en segundos."
                     </div>
-                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 5px;">
-                        <strong style="color: var(--nura-gold);">Producto:</strong> "Serum antifrizz natural, hecho a mano para llevar contigo a cualquier lugar."
+                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: var(--theme-glow-light); border-radius: 5px; transition: background 0.5s ease;">
+                        <strong style="color: var(--theme-primary); transition: color 0.5s ease;">Producto:</strong> "Serum antifrizz natural, hecho a mano para llevar contigo a cualquier lugar."
                     </div>
-                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: rgba(212, 175, 55, 0.1); border-radius: 5px;">
-                        <strong style="color: var(--nura-gold);">Artesanal:</strong> "Hecho a mano por manos artesanas. No por robots."
+                    <div style="color: var(--nura-white); font-size: 1.1rem; margin: 15px 0; padding: 15px; background: var(--theme-glow-light); border-radius: 5px; transition: background 0.5s ease;">
+                        <strong style="color: var(--theme-primary); transition: color 0.5s ease;">Artesanal:</strong> "Hecho a mano por manos artesanas. No por robots."
                     </div>
                 </div>
             </div>
@@ -1108,12 +1202,12 @@
 
                 <div class="dont-item">
                     <h4>❌ Empaque Brillante</h4>
-                    <p>El envase debe ser negro mate, nunca brillante. Ocultar el líquido rosa.</p>
+                    <p>El envase debe ser negro mate, nunca brillante. Ocultar el color del líquido interior (rosa/azul) a excepción de la ventana transparente.</p>
                 </div>
 
                 <div class="dont-item">
-                    <h4>❌ Símbolos Intercambiados</h4>
-                    <p>No usar la luna para hombres ni el sol para mujeres. Respetar Ixchel/Itzamná.</p>
+                    <h4>❌ Colores y Símbolos Intercambiados</h4>
+                    <p>No usar la luna ni el color rosa para hombres, ni el sol ni el color azul para mujeres. Respetar la identidad Ixchel/Itzamná.</p>
                 </div>
 
                 <div class="dont-item">
@@ -1144,11 +1238,30 @@
         <p>Manual de Identidad de Marca - Versión 1.0</p>
         <p class="footer-tagline">NATURAL • ÚNICO • RADIANTE</p>
         <p style="margin-top: 30px; font-size: 0.85rem;">
-            <a href="index.html" style="color: var(--nura-gold); text-decoration: none;">← Volver al Sitio Principal</a>
+            <a href="index.html" style="color: var(--theme-primary); text-decoration: none; transition: color 0.5s ease;">← Volver al Sitio Principal</a>
         </p>
     </footer>
 
     <script>
+        // Bloquear clic derecho
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Bloquear copiar, cortar y atajos de herramientas de desarrollo (F12, Ctrl+U, Ctrl+Shift+I)
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J' || e.key === 'i' || e.key === 'c' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && (e.key === 'C' || e.key === 'c' || e.key === 'X' || e.key === 'x' || e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+            }
+        });
+
         // Smooth scroll para navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1162,6 +1275,33 @@
                 }
             });
         });
+
+        // Control de Temas (Femenino / Masculino)
+        const btnFemale = document.getElementById('btnFemale');
+        const btnMale = document.getElementById('btnMale');
+
+        function setTheme(theme) {
+            if (theme === 'female') {
+                document.body.classList.remove('theme-male');
+                document.body.classList.add('theme-female');
+                btnFemale.classList.add('active');
+                btnMale.classList.remove('active');
+                localStorage.setItem('nura-theme', 'female');
+            } else {
+                document.body.classList.remove('theme-female');
+                document.body.classList.add('theme-male');
+                btnFemale.classList.remove('active');
+                btnMale.classList.add('active');
+                localStorage.setItem('nura-theme', 'male');
+            }
+        }
+
+        btnFemale.addEventListener('click', () => setTheme('female'));
+        btnMale.addEventListener('click', () => setTheme('male'));
+
+        // Cargar tema inicial (local o por defecto 'female')
+        const savedTheme = localStorage.getItem('nura-theme') || 'female';
+        setTheme(savedTheme);
 
         // Animación al scroll
         const observerOptions = {

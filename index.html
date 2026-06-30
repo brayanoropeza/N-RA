@@ -22,6 +22,7 @@
             --nura-black: #1A1A1A;
             --nura-gold: #D4AF37;
             --nura-pink: #E91E63;
+            --nura-blue: #1E88E5;
             --nura-white: #FFFFFF;
             --nura-gray: #E0E0E0;
         }
@@ -32,6 +33,26 @@
             color: var(--nura-white);
             line-height: 1.6;
             overflow-x: hidden;
+            
+            /* Bloquear selección de texto */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            
+            /* Theme defaults (Femenina / Pink by default) */
+            --theme-primary: var(--nura-pink);
+            --theme-primary-rgb: 233, 30, 99;
+            --theme-glow: rgba(233, 30, 99, 0.3);
+            --theme-glow-light: rgba(233, 30, 99, 0.15);
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        body.theme-male {
+            --theme-primary: var(--nura-blue);
+            --theme-primary-rgb: 30, 136, 229;
+            --theme-glow: rgba(30, 136, 229, 0.3);
+            --theme-glow-light: rgba(30, 136, 229, 0.15);
         }
 
         h1, h2, h3, .logo-text {
@@ -50,16 +71,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            border-bottom: 1px solid var(--theme-glow);
+            transition: border-bottom 0.5s ease;
         }
 
         .logo {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             text-decoration: none;
             font-weight: 600;
             letter-spacing: 3px;
+            transition: color 0.5s ease;
         }
 
         .logo span {
@@ -70,6 +93,7 @@
             display: flex;
             gap: 30px;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -83,7 +107,7 @@
         }
 
         .nav-links a:hover {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
         }
 
         .menu-toggle {
@@ -95,9 +119,50 @@
         .menu-toggle span {
             width: 25px;
             height: 2px;
-            background: var(--nura-gold);
+            background: var(--theme-primary);
             margin: 3px 0;
             transition: 0.3s;
+        }
+
+        /* Theme Switcher Styles */
+        .theme-switcher {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 4px;
+            gap: 4px;
+            margin-left: 20px;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            color: var(--nura-gray);
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--nura-white);
+        }
+
+        .theme-btn.active {
+            background: var(--theme-primary);
+            color: var(--nura-black);
+            box-shadow: 0 0 10px var(--theme-glow);
+            font-weight: 600;
         }
 
         /* Hero Section */
@@ -122,10 +187,15 @@
             transform: translate(-50%, -50%);
             width: 600px;
             height: 600px;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23D4AF37" stroke-width="0.5" opacity="0.1"/></svg>');
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%23E91E63" stroke-width="0.5" opacity="0.15"/></svg>');
             background-size: contain;
             background-repeat: no-repeat;
             opacity: 0.3;
+            transition: background 0.5s ease;
+        }
+
+        body.theme-male .hero::before {
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" fill="none" stroke="%231E88E5" stroke-width="0.5" opacity="0.15"/></svg>');
         }
 
         .hero-content {
@@ -137,10 +207,11 @@
         .hero-logo {
             font-family: 'Playfair Display', serif;
             font-size: 5rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 20px;
             letter-spacing: 8px;
             animation: fadeInDown 1s ease;
+            transition: color 0.5s ease;
         }
 
         .hero-tagline {
@@ -154,26 +225,29 @@
 
         .hero-image {
             width: 100%;
-            max-width: 800px;
+            max-width: 600px;
             margin: 40px auto;
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 30px 60px rgba(0,0,0,0.5);
             animation: fadeInUp 1s ease 0.6s both;
+            border: 1px solid var(--theme-glow);
+            transition: border 0.5s ease;
         }
 
         .hero-image img {
             width: 100%;
             height: auto;
             display: block;
+            transition: opacity 0.5s ease;
         }
 
         .cta-button {
             display: inline-block;
             padding: 18px 50px;
             background: transparent;
-            border: 2px solid var(--nura-gold);
-            color: var(--nura-gold);
+            border: 2px solid var(--theme-primary);
+            color: var(--theme-primary);
             text-decoration: none;
             font-size: 0.95rem;
             letter-spacing: 3px;
@@ -184,10 +258,10 @@
         }
 
         .cta-button:hover {
-            background: var(--nura-gold);
+            background: var(--theme-primary);
             color: var(--nura-black);
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+            box-shadow: 0 10px 30px var(--theme-glow);
         }
 
         /* Productos Section */
@@ -199,9 +273,10 @@
         .section-title {
             text-align: center;
             font-size: 3rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 20px;
             font-weight: 600;
+            transition: color 0.5s ease;
         }
 
         .section-subtitle {
@@ -222,7 +297,7 @@
 
         .producto-card {
             background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
             border-radius: 10px;
             padding: 40px 30px;
             text-align: center;
@@ -238,15 +313,33 @@
             left: 0;
             right: 0;
             height: 3px;
-            background: linear-gradient(90deg, transparent, var(--nura-gold), transparent);
+            background: linear-gradient(90deg, transparent, var(--theme-primary), transparent);
             opacity: 0;
             transition: opacity 0.3s ease;
         }
 
+        .producto-card.card-ixchel::before {
+            background: linear-gradient(90deg, transparent, var(--nura-pink), transparent);
+        }
+
+        .producto-card.card-itzamna::before {
+            background: linear-gradient(90deg, transparent, var(--nura-blue), transparent);
+        }
+
         .producto-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.1);
-            border-color: var(--nura-gold);
+            box-shadow: 0 20px 40px var(--theme-glow);
+            border-color: var(--theme-primary);
+        }
+
+        .producto-card.card-ixchel:hover {
+            border-color: var(--nura-pink);
+            box-shadow: 0 20px 40px rgba(233, 30, 99, 0.2);
+        }
+
+        .producto-card.card-itzamna:hover {
+            border-color: var(--nura-blue);
+            box-shadow: 0 20px 40px rgba(30, 136, 229, 0.2);
         }
 
         .producto-card:hover::before {
@@ -260,8 +353,17 @@
 
         .producto-card h3 {
             font-size: 2rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .producto-card.card-ixchel h3 {
+            color: var(--nura-pink);
+        }
+
+        .producto-card.card-itzamna h3 {
+            color: var(--nura-blue);
         }
 
         .producto-card .deidad {
@@ -286,26 +388,44 @@
             padding: 8px 0;
             color: var(--nura-gray);
             font-size: 0.9rem;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            border-bottom: 1px solid var(--theme-glow-light);
         }
 
         .producto-features li:before {
             content: '✦ ';
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-right: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .card-ixchel .producto-features li:before {
+            color: var(--nura-pink);
+        }
+
+        .card-itzamna .producto-features li:before {
+            color: var(--nura-blue);
         }
 
         .precio {
             font-size: 2rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-weight: 600;
             margin: 20px 0;
+            transition: color 0.3s ease;
+        }
+
+        .card-ixchel .precio {
+            color: var(--nura-pink);
+        }
+
+        .card-itzamna .precio {
+            color: var(--nura-blue);
         }
 
         .buy-button {
             display: inline-block;
             padding: 15px 40px;
-            background: var(--nura-gold);
+            background: var(--theme-primary);
             color: var(--nura-black);
             text-decoration: none;
             border-radius: 3px;
@@ -318,7 +438,28 @@
 
         .buy-button:hover {
             background: var(--nura-white);
+            color: var(--theme-primary);
             transform: translateY(-2px);
+        }
+
+        .card-ixchel .buy-button {
+            background: var(--nura-pink);
+            color: var(--nura-white);
+        }
+
+        .card-ixchel .buy-button:hover {
+            background: var(--nura-white);
+            color: var(--nura-pink);
+        }
+
+        .card-itzamna .buy-button {
+            background: var(--nura-blue);
+            color: var(--nura-white);
+        }
+
+        .card-itzamna .buy-button:hover {
+            background: var(--nura-white);
+            color: var(--nura-blue);
         }
 
         /* About Section */
@@ -336,8 +477,9 @@
 
         .about h2 {
             font-size: 2.5rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 30px;
+            transition: color 0.5s ease;
         }
 
         .about p {
@@ -356,14 +498,16 @@
 
         .value-item {
             padding: 30px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
             border-radius: 5px;
+            transition: border 0.5s ease;
         }
 
         .value-item h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.3rem;
             margin-bottom: 10px;
+            transition: color 0.5s ease;
         }
 
         .value-item p {
@@ -396,9 +540,10 @@
         }
 
         .ingrediente h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.2rem;
             margin-bottom: 10px;
+            transition: color 0.5s ease;
         }
 
         .ingrediente p {
@@ -415,8 +560,9 @@
 
         .contacto h2 {
             font-size: 2.5rem;
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 30px;
+            transition: color 0.5s ease;
         }
 
         .contacto-info {
@@ -427,13 +573,15 @@
         .contacto-item {
             margin: 20px 0;
             padding: 20px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
+            border: 1px solid var(--theme-glow-light);
             border-radius: 5px;
+            transition: border 0.5s ease;
         }
 
         .contacto-item h4 {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             margin-bottom: 10px;
+            transition: color 0.5s ease;
         }
 
         .contacto-item p {
@@ -448,10 +596,10 @@
         }
 
         .social-links a {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             font-size: 1.5rem;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: color 0.5s ease;
         }
 
         .social-links a:hover {
@@ -463,7 +611,8 @@
             background: var(--nura-black);
             padding: 40px 5%;
             text-align: center;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+            border-top: 1px solid var(--theme-glow);
+            transition: border-top 0.5s ease;
         }
 
         footer .logo {
@@ -479,10 +628,11 @@
         }
 
         .footer-tagline {
-            color: var(--nura-gold);
+            color: var(--theme-primary);
             letter-spacing: 3px;
             font-size: 0.85rem;
             margin-top: 20px;
+            transition: color 0.5s ease;
         }
 
         /* Animaciones */
@@ -509,6 +659,23 @@
         }
 
         /* Responsive */
+        @media (max-width: 900px) {
+            nav {
+                flex-wrap: wrap;
+                gap: 15px;
+                padding: 15px 5%;
+            }
+            .theme-switcher {
+                order: 3;
+                margin-left: 0;
+                width: 100%;
+                justify-content: center;
+            }
+            .theme-btn {
+                flex: 1;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -520,7 +687,7 @@
                 flex-direction: column;
                 padding: 20px;
                 gap: 20px;
-                border-bottom: 1px solid var(--nura-gold);
+                border-bottom: 1px solid var(--theme-primary);
             }
 
             .nav-links.active {
@@ -564,8 +731,14 @@
             <li><a href="#nosotros">Nosotros</a></li>
             <li><a href="#ingredientes">Ingredientes</a></li>
             <li><a href="#contacto">Contacto</a></li>
-            <li><a href="brand-guidelines.html">BrAND Guidelines</a></li>
+            <li><a href="brand-guidelines.html">Brand Guidelines</a></li>
         </ul>
+        
+        <div class="theme-switcher">
+            <button id="btnFemale" class="theme-btn active" title="Versión Ixchel (Femenina)">🌙 Femenino</button>
+            <button id="btnMale" class="theme-btn" title="Versión Itzamná (Masculina)">☀️ Masculino</button>
+        </div>
+
         <div class="menu-toggle" id="menuToggle">
             <span></span>
             <span></span>
@@ -580,7 +753,7 @@
             <p class="hero-tagline">NATURAL • ÚNICO • RADIANTE</p>
 
             <div class="hero-image">
-                <img src="tu-imagen-aqui.png" alt="NÜRA Ixchel e Itzamná - Serum antifrizz natural">
+                <img src="nura_female_serum.png" alt="NÜRA Ixchel e Itzamná - Serum antifrizz natural">
             </div>
 
             <p style="font-size: 1.2rem; color: var(--nura-gray); max-width: 600px; margin: 0 auto;">
@@ -599,7 +772,7 @@
 
         <div class="productos-grid">
             <!-- Ixchel -->
-            <div class="producto-card">
+            <div class="producto-card card-ixchel">
                 <div class="producto-icon">🌙</div>
                 <h3>NÜRA</h3>
                 <p class="deidad">Ixchel</p>
@@ -619,7 +792,7 @@
             </div>
 
             <!-- Itzamná -->
-            <div class="producto-card">
+            <div class="producto-card card-itzamna">
                 <div class="producto-icon">☀️</div>
                 <h3>NÜRA</h3>
                 <p class="deidad">Itzamná</p>
@@ -631,7 +804,7 @@
                     <li>Acción inmediata contra el frizz</li>
                     <li>Ingredientes 100% naturales</li>
                     <li>Envase portátil negro mate</li>
-                    <li>Líquido rosa radiante</li>
+                    <li>Líquido azul celestial</li>
                 </ul>
 
                 <div class="precio">$120 MXN</div>
@@ -751,6 +924,25 @@
 
     <!-- Scripts -->
     <script>
+        // Bloquear clic derecho
+        document.addEventListener('contextmenu', e => e.preventDefault());
+
+        // Bloquear copiar, cortar y atajos de herramientas de desarrollo (F12, Ctrl+U, Ctrl+Shift+I)
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J' || e.key === 'i' || e.key === 'c' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && (e.key === 'C' || e.key === 'c' || e.key === 'X' || e.key === 'x' || e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+            }
+        });
+
         // Menú móvil
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
@@ -779,6 +971,48 @@
                 }
             });
         });
+
+        // Control de Temas (Femenino / Masculino)
+        const btnFemale = document.getElementById('btnFemale');
+        const btnMale = document.getElementById('btnMale');
+        const heroImg = document.querySelector('.hero-image img');
+
+        function setTheme(theme) {
+            if (theme === 'female') {
+                document.body.classList.remove('theme-male');
+                document.body.classList.add('theme-female');
+                btnFemale.classList.add('active');
+                btnMale.classList.remove('active');
+                if (heroImg) {
+                    heroImg.style.opacity = '0';
+                    setTimeout(() => {
+                        heroImg.src = 'nura_female_serum.png';
+                        heroImg.style.opacity = '1';
+                    }, 200);
+                }
+                localStorage.setItem('nura-theme', 'female');
+            } else {
+                document.body.classList.remove('theme-female');
+                document.body.classList.add('theme-male');
+                btnFemale.classList.remove('active');
+                btnMale.classList.add('active');
+                if (heroImg) {
+                    heroImg.style.opacity = '0';
+                    setTimeout(() => {
+                        heroImg.src = 'nura_male_serum.png';
+                        heroImg.style.opacity = '1';
+                    }, 200);
+                }
+                localStorage.setItem('nura-theme', 'male');
+            }
+        }
+
+        btnFemale.addEventListener('click', () => setTheme('female'));
+        btnMale.addEventListener('click', () => setTheme('male'));
+
+        // Cargar tema inicial (local o por defecto 'female')
+        const savedTheme = localStorage.getItem('nura-theme') || 'female';
+        setTheme(savedTheme);
 
         // Animación al scroll
         const observerOptions = {
